@@ -5,7 +5,7 @@ Console.WriteLine("");
 
 
 Random numero = new Random();
-int numeroAleatorio = numero.Next(1, 10);
+
 int intentos = 0;
 
 StartGame();
@@ -15,11 +15,12 @@ void StartGame()
 
     Console.WriteLine("Como es tu nombre?");
     var jugador = Console.ReadLine();
-    WantToPlay(jugador);
+    int numeroAleatorio = numero.Next(1, 10);
+    WantToPlay(jugador,numeroAleatorio);
   
 }
 
-void WantToPlay(string? jugador)
+void WantToPlay(string? jugador, int numeroAleatorio)
 {
     Console.WriteLine($"Hola {jugador} listo para jugar?  (Si/No)");
     var play = Console.ReadLine();
@@ -28,7 +29,7 @@ void WantToPlay(string? jugador)
     {
 
         case "si":
-            Play();
+            Play(numeroAleatorio);
             break;
             
         case "no":
@@ -36,17 +37,14 @@ void WantToPlay(string? jugador)
             break;
         default:
             Console.WriteLine("No es una opcion valida");
-            WantToPlay(jugador);
+            WantToPlay(jugador, numeroAleatorio);
             break;
     }
 
 }
 
-void Play()
+void Play(int numeroAleatorio)
 {
-    
-
-
     try
     {
         Console.WriteLine("Introduzca un numero del 1 al 10");
@@ -71,19 +69,19 @@ void Play()
         {
             Console.WriteLine($"El numero debe ser mayor");
             intentos++;
-            Play();
+            Play(numeroAleatorio);
         }
         else if (numeroUsuario > numeroAleatorio)
         {
             Console.WriteLine($"El numero debe ser menor");
             intentos++;
-            Play();
+            Play(numeroAleatorio);
         }
     }
     catch (Exception e)
     {
         Console.WriteLine($"Sucedio un error : {e.Message}");
-        Play();
+        Play(numeroAleatorio);
     }
 
     
@@ -101,7 +99,8 @@ void Seguir()
     var seguir = Console.ReadLine();
     if (seguir?.ToLower() == "si")
     {
-        Play();
+        int numeroAleatorio = numero.Next(1, 10);
+        Play(numeroAleatorio);
     }
     else
     {
